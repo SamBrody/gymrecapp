@@ -9,6 +9,26 @@
       Title="WorkSpace" Background="#FF0B445F">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GridSplitter Width="5" Height="Auto" Grid.Column="1" Grid.RowSpan="3" Background="#FF072432" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+        <GridSplitter Height="5" Width="Auto" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.ColumnSpan="1" Grid.Row="1" Margin="0,18,0,0" Background="#FF072432"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Background="#FF41444F" Width="Auto" Height="25" VerticalAlignment="Stretch">
+            <ToolBarTray Width="Auto" Height="25" >
+                <ToolBar Height="25">
+
+                </ToolBar>
+            </ToolBarTray>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Background="BlueViolet"> </StackPanel>
+        <StackPanel Grid.Row="2" Background="Brown"></StackPanel>
+        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Background="Aquamarine"></StackPanel>
     </Grid>
 </Page>
