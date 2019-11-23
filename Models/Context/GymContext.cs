@@ -6,9 +6,7 @@ namespace GYMRecordApp.Models.Context
     {
         public DbSet<TrainCountM> TrainCounts { get; set; }
         public DbSet<VRecM> VRecs { get; set; }
-        public DbSet<WeightM> WeightModels { get; set; }
-
-     
+        public DbSet<WeightM> WeightModels { get; set; }        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,5 +32,7 @@ namespace GYMRecordApp.Models.Context
                 entity.HasKey(e => e.ID_weight);
             });
         }
+
+
     }
 }
