@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1024" 
-      Title="WorkSpace" Background="#FFC8D2D6" Foreground="WhiteSmoke" >
+      Title="WorkSpace" Background="#FFC8D2D6" Foreground="WhiteSmoke" Loaded="Page_Loaded">
     <Page.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -51,7 +51,7 @@
         <Grid Width="Auto" Margin="60,50,0,0" Background="Bisque">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.7*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
@@ -60,16 +60,26 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel x:Name="StackPanelWeight" Grid.RowSpan="2" Grid.Column="0" Background="Beige">
-                    <DataGrid x:Name="gridweight" AutoGenerateColumns="True">
-                        
+                    <DataGrid x:Name="dgWeight" AutoGenerateColumns="True">
+
                     </DataGrid>
                 </StackPanel>
                 <StackPanel x:Name="StackPanelV"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"  Background="BlanchedAlmond">
+                    <DataGrid x:Name="dgV" AutoGenerateColumns="True">
 
+                    </DataGrid>
                 </StackPanel>
-                <StackPanel x:Name="StackPanelTC"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"  Background="DimGray">
-
-                </StackPanel>
+                <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.7*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" Grid.Column="0" x:Name="dgTC" AutoGenerateColumns="True">
+                    </DataGrid>
+                    <StackPanel Grid.Row="1" Background="Blue"></StackPanel>
+                </Grid>
+                <GridSplitter Opacity="1" Grid.Column="0" Grid.RowSpan="2" Width="8" Background="#FF673881" />
+                <GridSplitter Opacity="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Height="8" Background="#FF673881"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Grid.RowSpan="2" Background="#FF331C40">

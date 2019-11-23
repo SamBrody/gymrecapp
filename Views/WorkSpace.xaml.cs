@@ -1,6 +1,8 @@
 ﻿using GYMRecordApp.Models;
+using GYMRecordApp.Models.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,6 +45,18 @@ namespace GYMRecordApp.Views
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+        }
+
+        GymContext gymContextdb = new GymContext();
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            var weightDB = gymContextdb.WeightModels.ToList();
+            var vrecDB = gymContextdb.VRecs.ToList();
+            var traincountDB = gymContextdb.TrainCounts.ToList();
+            dgWeight.ItemsSource = weightDB;
+            dgV.ItemsSource = vrecDB;
+            dgTC.ItemsSource = traincountDB;
         }
     }
 }
