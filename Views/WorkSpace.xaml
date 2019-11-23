@@ -4,31 +4,81 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GYMRecordApp.Views"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="768" d:DesignWidth="1024" 
-      Title="WorkSpace" Background="#FF0B445F">
+      d:DesignHeight="600" d:DesignWidth="1024" 
+      Title="WorkSpace" Background="#FFC8D2D6" Foreground="WhiteSmoke" >
+    <Page.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <GridSplitter Width="5" Height="Auto" Grid.Column="1" Grid.RowSpan="3" Background="#FF072432" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
-        <GridSplitter Height="5" Width="Auto" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.ColumnSpan="1" Grid.Row="1" Margin="0,18,0,0" Background="#FF072432"/>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Background="#FF41444F" Width="Auto" Height="25" VerticalAlignment="Stretch">
-            <ToolBarTray Width="Auto" Height="25" >
-                <ToolBar Height="25">
-
-                </ToolBar>
-            </ToolBarTray>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Background="BlueViolet"> </StackPanel>
-        <StackPanel Grid.Row="2" Background="Brown"></StackPanel>
-        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Background="Aquamarine"></StackPanel>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Page.Triggers>
+    
+    <Grid Background="LightGray">
+        <Grid Height="50" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="0" Background="#FF673881">
+            <TextBlock Text="GymRecordsApp" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center"/>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right" >
+                <TextBlock Text="Sam Brody" VerticalAlignment="Center" FontSize="18"/>
+                <materialDesign:PopupBox Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel Width="150">
+                        <Button Content="Settings"/>
+                        <Button Content="Help"/>
+                        <Button Content="Notes"/>
+                        <Separator/>
+                        <Button x:Name="ButtonPopUpExit" Content="Exit" Click="ButtonPopUpExit_Click"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Grid.RowSpan="2" Background="#FF331C40">
+            <StackPanel>
+                <Grid Height="130" Background="White">
+                    <Button x:Name="ButtonCloseMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
+                        <materialDesign:PackIcon Foreground="#FF331C40" Kind="ArrowLeft" Width="25" Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Foreground="#FF331C40" Kind="Menu" Width="25" Height="25"/>
+                    </Button>
+                </Grid>
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF673881">
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Home" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Table" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Records" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ExitToApp" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Exit" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

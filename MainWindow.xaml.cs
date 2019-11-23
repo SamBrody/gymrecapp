@@ -24,6 +24,12 @@ namespace GYMRecordApp
         public MainWindow()
         {
             InitializeComponent();
+            Uri iconUri = new Uri("images/gymrec.ico", UriKind.Relative);
+            this.Icon = BitmapFrame.Create(iconUri);
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }
