@@ -30,6 +30,12 @@ namespace GYMRecordApp.Views
             db = new GymContext();
             db.WeightModels.Load();
             dgWeight.ItemsSource = db.WeightModels.Local.ToBindingList();
+
+            db.VRecs.Load();
+            dgV.ItemsSource = db.VRecs.Local.ToBindingList();
+
+            db.TrainCounts.Load();
+            dgTC.ItemsSource = db.TrainCounts.Local.ToBindingList();
         }
 
         private void ButtonPopUpExit_Click(object sender, RoutedEventArgs e)
