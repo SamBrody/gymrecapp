@@ -1,5 +1,6 @@
 ﻿using GYMRecordApp.Models;
 using GYMRecordApp.Models.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,14 @@ namespace GYMRecordApp.Views
     /// </summary>
     public partial class WorkSpace : Page
     {
+        GymContext db;
         public WorkSpace()
         {
             InitializeComponent();
+
+            db = new GymContext();
+            db.WeightModels.Load();
+            dgWeight.ItemsSource = db.WeightModels.Local.ToBindingList();
         }
 
         private void ButtonPopUpExit_Click(object sender, RoutedEventArgs e)
@@ -33,6 +39,11 @@ namespace GYMRecordApp.Views
             {
                 System.Windows.Application.Current.Shutdown();
             }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -45,18 +56,69 @@ namespace GYMRecordApp.Views
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+        }       
+
+        private void ButtonWUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            db.SaveChanges();
         }
 
-        GymContext gymContextdb = new GymContext();
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void ButtonWDel_Click(object sender, RoutedEventArgs e)
         {
-            var weightDB = gymContextdb.WeightModels.ToList();
-            var vrecDB = gymContextdb.VRecs.ToList();
-            var traincountDB = gymContextdb.TrainCounts.ToList();
-            dgWeight.ItemsSource = weightDB;
-            dgV.ItemsSource = vrecDB;
-            dgTC.ItemsSource = traincountDB;
+            if (dgWeight.SelectedItems != null)
+            {
+                for (int i=0; i<dgWeight.SelectedItems.Count;i++)
+                {
+                    WeightM weightM = dgWeight.SelectedItems[i] as WeightM;
+                    if (weightM != null)
+                    {
+                        db.WeightModels.Remove(weightM);
+                    }
+                }
+            }            
+            db.SaveChanges();
+        }       
+
+        private void ButtonVUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            db.SaveChanges();
+        }
+
+        private void ButtonVDel_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgV.SelectedItems != null)
+            {
+                for (int i = 0; i < dgV.SelectedItems.Count; i++)
+                {
+                    VRecM vrecM = dgV.SelectedItems[i] as VRecM;
+                    if (vrecM != null)
+                    {
+                        db.VRecs.Remove(vrecM);
+                    }
+                }
+            }
+            db.SaveChanges();
+        }
+
+        private void ButtonTCUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            db.SaveChanges();
+        }
+
+        private void ButtonTCDel_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgTC.SelectedItems != null)
+            {
+                for (int i = 0; i < dgTC.SelectedItems.Count; i++)
+                {
+                    TrainCountM trainCountM = dgTC.SelectedItems[i] as TrainCountM;
+                    if (trainCountM != null)
+                    {
+                        db.TrainCounts.Remove(trainCountM);
+                    }
+                }
+            }
+            db.SaveChanges();
         }
     }
 }

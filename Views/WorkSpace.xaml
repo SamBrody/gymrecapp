@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1024" 
-      Title="WorkSpace" Background="#FFC8D2D6" Foreground="WhiteSmoke" Loaded="Page_Loaded">
+      Title="WorkSpace" Background="#FFC8D2D6" Foreground="WhiteSmoke">
     <Page.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
@@ -39,11 +39,10 @@
                 <TextBlock Text="Sam Brody" VerticalAlignment="Center" FontSize="18"/>
                 <materialDesign:PopupBox Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                     <StackPanel Width="150">
-                        <Button Content="Settings"/>
-                        <Button Content="Help"/>
-                        <Button Content="Notes"/>
+                        <Button Content="Настройки"/>
+                        <Button Content="Помощь"/>
                         <Separator/>
-                        <Button x:Name="ButtonPopUpExit" Content="Exit" Click="ButtonPopUpExit_Click"/>
+                        <Button x:Name="ButtonPopUpExit" Content="Выход" Click="ButtonPopUpExit_Click"/>
                     </StackPanel>
                 </materialDesign:PopupBox>
             </StackPanel>
@@ -64,7 +63,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="0.05*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="dgWeight" AutoGenerateColumns="False" Grid.Row="0" Background="#FFD8D8D8">
+                    <DataGrid x:Name="dgWeight" AutoGenerateColumns="False" Grid.Row="0" Background="#FFD8D8D8" CanUserAddRows="True" CanUserDeleteRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Path=ID_weight}" Width="0.6*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date}" Width="*"/>
@@ -72,13 +71,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button x:Name="ButtonWSave" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="39,0,0,0"  Background="#FF331C40" Foreground="#FF673881" BorderBrush="{x:Null}">
-                            <materialDesign:PackIcon Kind="ContentSave" Width="25" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button x:Name="ButtonWUpdate" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" BorderBrush="{x:Null}" Click="ButtonWUpdate_Click">
+                            <materialDesign:PackIcon Kind="Update" Width="25" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Button>
-                        <Button x:Name="ButtonWAdd" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"  Background="#FF331C40" Foreground="#FF673881" BorderBrush="{x:Null}">
-                            <materialDesign:PackIcon Kind="Add" Width="25" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Button>
-                        <Button x:Name="ButtonWDel" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"  Background="#FF331C40" Foreground="#FF673881" BorderBrush="{x:Null}">
+                        <Button x:Name="ButtonWDel" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"  Background="#FF331C40" Foreground="#FF673881" BorderBrush="{x:Null}" Click="ButtonWDel_Click">
                             <materialDesign:PackIcon Kind="Delete" Width="25" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Button>
                     </StackPanel>
@@ -88,7 +84,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="0.11*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="dgV" AutoGenerateColumns="False" Background="#FFD8D8D8">
+                    <DataGrid x:Name="dgV" AutoGenerateColumns="False" Background="#FFD8D8D8" CanUserAddRows="True" CanUserDeleteRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Path=ID_V}" Width="0.7*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date}" Width="1.35*"/>
@@ -103,9 +99,8 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button x:Name="ButtonVSave" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Сохранить" BorderBrush="{x:Null}"/>
-                        <Button x:Name="ButtonVAdd" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Добавить" BorderBrush="{x:Null}"/>
-                        <Button x:Name="ButtonVDel" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Удалить" BorderBrush="{x:Null}"/>
+                        <Button x:Name="ButtonVUpdate" Click="ButtonVUpdate_Click" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="180,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Обновить" BorderBrush="{x:Null}"/>
+                        <Button x:Name="ButtonVDel" Click="ButtonVDel_Click" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Удалить" BorderBrush="{x:Null}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="#FF673881">
@@ -114,7 +109,7 @@
                         <RowDefinition Height="0.18*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <DataGrid Grid.Row="0" Grid.Column="0" x:Name="dgTC" AutoGenerateColumns="False" Background="#FFD8D8D8">
+                    <DataGrid Grid.Row="0" Grid.Column="0" x:Name="dgTC" AutoGenerateColumns="False" Background="#FFD8D8D8" CanUserAddRows="True" CanUserDeleteRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Path=ID_train_counter}" Width="0.2*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Дата первого занятия" Binding="{Binding Path=Date_Begin}" Width="*"/>
@@ -123,9 +118,8 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button x:Name="ButtonTCSave" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Сохранить" BorderBrush="{x:Null}"/>
-                        <Button x:Name="ButtonTCAdd" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Добавить" BorderBrush="{x:Null}"/>
-                        <Button x:Name="ButtonTCDel" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Удалить" BorderBrush="{x:Null}"/>
+                        <Button x:Name="ButtonTCUpdate" Click="ButtonTCUpdate_Click" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="180,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Обновить" BorderBrush="{x:Null}"/>
+                        <Button x:Name="ButtonTCDel" Click="ButtonTCDel_Click" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"  Background="#FF331C40" Foreground="#FF673881" Content="Удалить" BorderBrush="{x:Null}"/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Background="#FFD8D8D8"></StackPanel>
                 </Grid>
@@ -146,13 +140,13 @@
                     <ListViewItem Height="60" x:Name="ListViewHome">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Home" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <TextBlock Text="Главная" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60" x:Name="ListViewRecord">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Table" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Records" VerticalAlignment="Center" Margin="20 10"/>
+                            <TextBlock Text="Записи" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
