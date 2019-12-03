@@ -36,6 +36,8 @@ namespace GYMRecordApp.Views
 
             db.TrainCounts.Load();
             dgTC.ItemsSource = db.TrainCounts.Local.ToBindingList();
+
+            ListViewHome.IsSelected = true;
         }
 
         private void ButtonPopUpExit_Click(object sender, RoutedEventArgs e)
@@ -125,6 +127,18 @@ namespace GYMRecordApp.Views
                 }
             }
             db.SaveChanges();
+        }
+
+        private void ListViewRecord_Selected(object sender, RoutedEventArgs e)
+        {
+            spRecCont.Visibility = Visibility.Visible;
+            spHomeCont.Visibility = Visibility.Collapsed;
+        }
+
+        private void ListViewHome_Selected(object sender, RoutedEventArgs e)
+        {
+            spRecCont.Visibility = Visibility.Collapsed;
+            spHomeCont.Visibility = Visibility.Visible;
         }
     }
 }
