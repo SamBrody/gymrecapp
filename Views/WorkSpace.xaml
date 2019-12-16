@@ -50,7 +50,7 @@
         <StackPanel x:Name="spHomeCont" Margin="60,50,0,0">
 
         </StackPanel>
-        <StackPanel Margin="60,50,0,0" x:Name="spRecCont" Visibility="Collapsed">
+        <StackPanel Margin="60,50,0,0" x:Name="spRecCont" Visibility="Visible">
             <Grid Width="967" Height="550">
                 <Grid>
                     <Grid.ColumnDefinitions>
